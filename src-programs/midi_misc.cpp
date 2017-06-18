@@ -32,9 +32,9 @@ void MIDI_Scale::seed_gen() {
 }
 
 int MIDI_Scale::gen_rand_num() {
-	// seed_gen();
+	// seed_gen(); // put in main.cpp
 	boost::uniform_int<> dist(1, 2);
-    boost::variate_generator<boost::mt19937&, boost::uniform_int<> > num(gen, dist);
-    return num();
+    	boost::variate_generator<boost::mt19937&, boost::uniform_int<> > num(gen, dist);
+    	return num();
 }
 */
