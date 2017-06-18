@@ -1,0 +1,7 @@
+$ git status
+# ignore files below
+# the implementation is a DAW project
+/implementation
+# the /midi_files will be created for each user; unnecessary to upload
+/midi_files
+.DS_Store
