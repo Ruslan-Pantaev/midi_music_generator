@@ -19,6 +19,7 @@ The C++ MIDI music generator creates midi files from scratch. It can accept user
  - Create main.cpp template for ease of use
  - Clean up & simplify classes
  - Put dir and file check / creation into midi_misc.h?
+ - Add command-line args for key, tempo & no. repeats?
  - Incorporate libsndfile wav / aiff handling
  - Incorporate timidity++ or some other lib to convert .mid to audio file? (experienced bugs in osx 10.11.6)
  - Port over backend to server and create web-app frontend for ease of use?
