@@ -15,8 +15,8 @@ using namespace std;
  */
 bool does_file_exist(string fileName)
 {
-    ifstream infile(fileName);
-    return infile.good();
+	ifstream infile(fileName);
+	return infile.good();
 }
 
 int random_int(int min, int max) {

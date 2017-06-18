@@ -40,7 +40,7 @@ public:
 
 private:
 	int note; // set to C
-	boost::mt19937 gen;
+	// boost::mt19937 gen;		// no longer in use
 };
 
 
