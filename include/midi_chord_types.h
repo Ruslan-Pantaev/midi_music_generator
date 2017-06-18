@@ -16,18 +16,18 @@ namespace note {
         	_13, _b14, _14, _15ma =24
     };
     enum names {
-        C 			= 0,
+        C 		= 0,
         Csharp, Db 	= 1,
-        D 			= 2,
+        D 		= 2,
         Dsharp, Eb 	= 3,
-        E 			= 4,
-        F 			= 5,
+        E 		= 4,
+        F 		= 5,
         Fsharp, Gb 	= 6,
-        G 			= 7,
+        G 		= 7,
         Gsharp, Ab 	= 8,
-        A 			= 9,
+        A 		= 9,
         Asharp, Bb 	= 10,
-        B 			= 11
+        B 		= 11
     };
     enum octave {
     	oct_up = 12, oct_down = -12
@@ -36,18 +36,18 @@ namespace note {
 
 namespace key {			// Redundant, but a more intuitive namespace for specifying Key
 	enum names {
-        C 			= 0,
+        C 		= 0,
         Csharp, Db 	= 1,
-        D 			= 2,
+        D 		= 2,
         Dsharp, Eb 	= 3,
-        E 			= 4,
-        F 			= 5,
+        E 		= 4,
+        F 		= 5,
         Fsharp, Gb 	= 6,
-        G 			= 7,
+        G 		= 7,
         Gsharp, Ab 	= 8,
-        A 			= 9,
+        A 		= 9,
         Asharp, Bb 	= 10,
-        B 			= 11
+        B 		= 11
     };
 };
 
