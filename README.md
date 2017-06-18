@@ -18,6 +18,7 @@ The C++ MIDI music generator creates midi files from scratch. It can accept user
  - Change scale_types to vector<char> to handle octatonic, pentatonic, custom tone-rows & traditional modes (using char so user can indicate 'x' to indicate note-offs with the added benefit of taking up 1 byte vs 4 bytes of an int)
  - Create main.cpp template for ease of use
  - Clean up & simplify classes
+ - Respect the canonical form... add copy consr and assign op
  - Put dir and file check / creation into midi_misc.h?
  - Add command-line args for key, tempo & no. repeats?
  - Incorporate libsndfile wav / aiff handling
