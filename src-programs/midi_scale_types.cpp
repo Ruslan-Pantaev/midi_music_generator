@@ -9,7 +9,7 @@ const char Scale_type::ionian[16] 		= { 0,2,4,5,7,9,11,12,14,16,17,19,21,23,24,2
 const char Scale_type::dorian[16]		= { 0,2,4,5,7,9,11,12,14,16,17,19,21,23,24,26 };
 const char Scale_type::phrygian[16]		= { 0,2,4,5,7,9,11,12,14,16,17,19,21,23,24,26 };
 const char Scale_type::lydian[16] 		= { 0,2,4,5,7,9,11,12,14,16,17,19,21,23,24,26 };
-const char Scale_type::mixolydian[16]	= { 0,2,4,5,7,9,11,12,14,16,17,19,21,23,24,26 };
+const char Scale_type::mixolydian[16]		= { 0,2,4,5,7,9,11,12,14,16,17,19,21,23,24,26 };
 const char Scale_type::aeolian[16]		= { 0,2,4,5,7,9,11,12,14,16,17,19,21,23,24,26 };
 const char Scale_type::locrian[16]		= { 0,2,4,5,7,9,11,12,14,16,17,19,21,23,24,26 };
 /* end-MODES */
