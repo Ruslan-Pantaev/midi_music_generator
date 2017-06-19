@@ -95,6 +95,7 @@ public:
 private:
 	int note;
 	static std::unordered_map<std::string, std::vector<int>> chord_master;
+        static std::unordered_map<std::string, std::vector<int>> random_chord_master;
 	std::vector<std::vector<int>> chords_vec;
 };
 

@@ -1,7 +1,7 @@
 /* Author:		Ruslan Pantaev <arpiseaQ>
  * License:		MIT License
  * Start_Date:		6/4/2017
- * Last_modified:	6/17/2017
+ * Last_modified:	6/19/2017
  */
 
 #include <iostream>
@@ -22,6 +22,8 @@ using namespace std;
 int main() {
 	MIDI_Chord ch;
 
+	// cout << "random int: " << random_int(25, 100) << "\n";
+
 	/* Manually populate vector of chords to be used */
 	// ch.add_chord(note::E, "maj7");
 	// ch.add_chord(note::Gb, "min7");
@@ -40,20 +42,20 @@ int main() {
 
 	ch.print_chords();
 
-	ch.inversion(0, 1);
-	ch.inversion(1, 2);
-	ch.inversion(2, 2);
-	ch.inversion(3, 1);
-	ch.inversion(4, 1);
-	ch.inversion(5, 1);
-	ch.inversion(6, 1);
-	ch.inversion(7, 2);
+	// ch.inversion(0, 1);
+	// ch.inversion(1, 2);
+	// ch.inversion(2, 2);
+	// ch.inversion(3, 1);
+	// ch.inversion(4, 1);
+	// ch.inversion(5, 1);
+	// ch.inversion(6, 1);
+	// ch.inversion(7, 2);
 
 	for (int i=0; i<8; ++i) {
 		ch.oct_up(i);
 	}
 
-	const char x = 128;			// Arbitrary value to specify "no note" --> 128 for note-off
+	const char x = 128;			// Arbitrary value to specify "no note" --> 128 for note-off (make enum?)
 
 	MIDI_Scale scl_obj;
 
@@ -87,22 +89,10 @@ int main() {
 
 	/* TODO should these be const static?
 	* Maybe it'll be better to be be able to wipe these
-	* Assign chordlines and melodies using set_scale(key, scale_type, num_voices, char array)
-	* Change char array to vector<char>? 
+	* Assign chordlines and melodies using set_scale(key, vector<char> scale_type)
 	* edit arpiseaQ_6/5/2017_13:21
-	* edit arpiseaQ_6/17/2017_12:19
+	* edit arpiseaQ_6/19/2017_09:25 (Italy timezone)
 	*/
-
-	static const char chordline2[64] =
-	{
-		x,x,x,x,x,x,x,x, x,x,x,3,x,x,x,x,  3,x,x,x,x,x,x,x, 4,x,x,x,x,x,x,x,
-		x,x,x,4,5,x,x,x, 6,x,x,x,x,x,x,x,  x,x,1,2,x,x,x,x, x,x,6,x,x,x,x,x
-	};
-
-	// cout << "chordline2: \n";
-	// for (int i=0; i<64; i++) {
-	//     cout << chordline2[i] << endl;
-	// }
 
 	static const char bassline[64] =
 	{

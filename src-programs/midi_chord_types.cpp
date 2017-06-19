@@ -125,6 +125,62 @@ unordered_map<string, vector<int>> MIDI_Chord::chord_master {
 	// end-NINTHS/QUINTS
 };
 
+/* Creating second unordered_map containing simpler chords
+ * useable for random chord generation
+ */
+unordered_map<string, vector<int>> MIDI_Chord::random_chord_master {
+	// TRIADS
+	{ "maj",		{ 0,4,7 } },
+	{ "min",		{ 0,3,7 } },
+	{ "sus2",		{ 0,2,7 } },
+	{ "sus4",		{ 0,5,7 } },
+	{ "dim",		{ 0,3,6 } },
+	// end-TRIADS
+
+	// SEVENTHS/QUADS
+	{ "maj7",		{ 0,4,7,11 } },
+	{ "min7",		{ 0,3,7,10 } },
+	{ "dom7",		{ 0,4,7,10 } },
+	{ "half_dim7",		{ 0,3,6,10 } },
+	{ "full_dim7",		{ 0,3,6,9 } },
+
+	{ "maj7_sus2",		{ 0,2,7,11 } },
+	{ "maj7_sus4",		{ 0,5,7,11 } },
+	{ "min7_sus2",		{ 0,2,7,10 } },
+	{ "min7_sus4",		{ 0,5,7,10 } },
+
+	{ "maj6",		{ 0,4,7,9 } },
+	{ "min6",		{ 0,3,7,9 } },
+
+	{ "maj_add_9",		{ 0,4,7,14 } },
+	{ "maj_add_11",		{ 0,4,7,17 } },
+	{ "maj_add_13",		{ 0,4,7,21 } },
+
+	{ "min_add_9",		{ 0,3,7,14 } },
+	{ "min_add_11",		{ 0,3,7,17 } },
+
+	{ "sus2_add_9",		{ 0,2,7,14 } },
+	{ "sus2_add_11",	{ 0,2,7,17 } },
+	{ "sus2_add_13",	{ 0,2,7,21 } },
+
+	{ "sus4_add_9",		{ 0,5,7,14 } },
+	{ "sus4_add_11",	{ 0,5,7,17 } },
+	{ "sus4_add_13",	{ 0,5,7,21 } },
+	// end-SEVENTHS/QUADS
+
+	// NINTHS/QUINTS
+	{ "maj9",		{ 0,4,7,11,14 } },
+	{ "min9",		{ 0,3,7,10,14 } },
+	{ "dom9",		{ 0,4,7,10,14 } },
+	{ "maj11",		{ 0,4,11,14,18 } },
+	{ "min11",		{ 0,3,10,14,17 } },
+	{ "maj13",		{ 0,4,11,14,21 } },
+	{ "min13",		{ 0,3,10,14,21 } },
+	{ "dom11",		{ 0,4,10,14,18 } },
+	{ "dom13",		{ 0,4,10,14,21 } }
+	// end-NINTHS/QUINTS
+};
+
 ostream &operator <<(ostream &os, const MIDI_Chord &midi_chord) {
 	/* using cbegin() and cend when working with const object */
 	unordered_map<string, vector<int>>::const_iterator it = midi_chord.chord_master.cbegin();
@@ -227,22 +283,19 @@ void MIDI_Chord::add_rand_chord() {
 }
 
 void MIDI_Chord::add_rand_chord(int key) {
-	auto random_it = next(begin(chord_master), random_int(0, chord_master.size()-1 ));
-	while (chord_master[random_it->first].size() < 3) {
-		random_it = next(begin(chord_master), random_int(0, chord_master.size()-1 ));
-	}
-	chords_vec.push_back(chord_master[random_it->first]);
+	auto random_it(random_chord_master.begin());
+	advance(random_it, random_int(0, random_chord_master.size()-1));
 	string chord_type = random_it->first;
 	if (chord_type.find("maj") != string::npos) {
 		int n = random_int(0,5);
 		if (n < 4) { 			// this maj chord remains the root I chord
 		} else if (n == 4) {
 			key += 5;		// this maj chord will become the IV chord
-		} else {
+		} else if (n == 5) {
 			key += 7;		// this maj chord will become the V chord
 		}
 	} else if (chord_type.find("min") != string::npos) {
-		int n = random_int(0,2);
+		int n = random_int(0,5);
 		if (n == 0) {
 			key += 2;		// this min chord will become the ii chord
 		} else if (n == 1) {
@@ -251,26 +304,20 @@ void MIDI_Chord::add_rand_chord(int key) {
 			key += 9;		// this min chord will become the vi chord
 		}
 	} else if (chord_type.find("dom") != string::npos) {
-		key += 7;				// this dom chord will become the V chord
-	} else if (chord_type.find("dim") != string::npos
-			|| chord_type.find("b5") != string::npos) {
-		key += 11;				// this dim / b5 chord will become the vii chord
+		key += 7;			// this dom chord will become the V chord
+	} else if (chord_type.find("dim") != string::npos) {
+		key += 11;			// this dim / b5 chord will become the vii chord
 	} else if (chord_type.find("sus2") != string::npos
 			|| chord_type.find("sus4") != string::npos) {
 		int n = random_int(0,5);
-		if (n == 0) { 			// this sus chord remains the root I chord
-		} else if (n == 1) {
-			key += 2;		// this sus chord will become the ii chord
-		} else if (n == 2) {
-			key += 4;		// this sus chord will become the iii chord
-		} else if (n == 3) {
-			key += 5;		// this sus chord will become the IV chord
+		if (n < 4) { 			// this sus chord remains the root I chord
 		} else if (n == 4) {
-			key += 7;		// this sus chord will become the V chord
+			key += 5;		// this sus chord will become the IV chord
 		} else if (n == 5) {
-			key += 9;		// this sus chord will become the vi chord
+			key += 7;		// this sus chord will become the V chord
 		}
 	} else { }				// undefined; leave key unchanged (TODO define rest?)
+	chords_vec.push_back(random_chord_master[chord_type]);
 	define_key(key, chord_type, chords_vec.back());
 }
 
