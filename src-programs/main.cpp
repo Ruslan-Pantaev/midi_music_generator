@@ -38,7 +38,7 @@ int main() {
 	// ch.add_chord(note::E+note::oct_up, "maj11");
 
 	/* Or random chords with user-specified Key */
-	/* add_rand_chord(int key) is also overloaded without any key parameter */
+	/* add_rand_chord(int key) is also overloaded add_rand_chord() without any key parameter */
 	for (int i=0; i<8; ++i) {
 		ch.add_rand_chord(key::C);
 	}
@@ -110,15 +110,15 @@ int main() {
 	 * edit arpiseaQ_6/19/2017_09:25 (Italy timezone)
 	 */
 
-	const char x = 128;		// Value to specify "no note" --> 128 for note-off (preprocessor definition emitted err)
+	static const char x = 128;		// Value to specify "no note" --> 128 for note-off (preprocessor definition emitted err)
 
-	static const char chordline[64] =
+	char chordline[64] =
 	{
 		0,1,2,3,4,5,6,7, 1,x,x,x,x,x,x,x,  2,x,x,x,x,x,x,x, 3,x,x,x,x,x,x,x,
 		4,x,x,x,x,x,x,x, 5,x,x,x,4,5,x,x,  6,x,x,x,1,x,2,x, 7,x,x,x,x,3,7,3,
 	};
 
-	static const char bassline[64] =
+	char bassline[64] =
 	{
 		note::C,x,x,x,x,x,x,x,
 		note::A,x,x,x,x,x,x,x,
@@ -130,7 +130,7 @@ int main() {
 		note::C,note::D,note::F,note::A,note::G,note::B,note::A,note::C+note::oct_up
 	};
 
-	static const char fluteline[64] =
+	char fluteline[64] =
 	{
 		note::C,note::D,note::F,note::A,note::G,note::B,note::A,note::C+note::oct_up,
 		note::C,note::D,note::F,note::A,note::G,note::B,note::A,note::C+note::oct_up,
@@ -183,7 +183,7 @@ int main() {
 	for (unsigned loops=0; loops<4; ++loops) {				// SET num REPEATS here
 		for (unsigned row=0; row<128; ++row) {				// SET length of each measure
 			for(unsigned c=0; c<16; ++c) {				// 16 for patches, c stands for CHANNEL
-				int note 	= x;					// Arbitrary value to specify "no note" --> 128 for note-off
+				int note 	= x;				// Arbitrary value to specify "no note" --> 128 for note-off
 				int add 	= 0;
 				int vol 	= 127;
 

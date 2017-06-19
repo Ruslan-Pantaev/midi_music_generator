@@ -8,13 +8,13 @@
 
 struct Scale_type {
 	/* MODES */
-	const static char ionian[16];
-	const static char dorian[16];
-	const static char phrygian[16];
-	const static char lydian[16];
-	const static char mixolydian[16];
-	const static char aeolian[16];
-	const static char locrian[16];
+	static const char ionian[16];
+	static const char dorian[16];
+	static const char phrygian[16];
+	static const char lydian[16];
+	static const char mixolydian[16];
+	static const char aeolian[16];
+	static const char locrian[16];
 	/* end-MODES */
 };
 

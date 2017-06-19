@@ -330,13 +330,15 @@ vector<int> MIDI_Chord::return_chord(int index) {
 }
 
 void MIDI_Chord::print_chords() {
-	if (chords_vec.empty()) { cout << "chords_vec is empty!"; return; }
+	if (chords_vec.empty()) {
+		cout << "chords_vec is empty!"; return;
+	}
 	vector<int>::size_type size_outer = chords_vec.size();
 	for (unsigned int i=0; i<size_outer; ++i) {
 		cout << "Index: " << i << " Chord: ";
-    	for (unsigned int j=0; j<chords_vec[i].size(); ++j) {
-        	cout << chords_vec[i][j] << " ";
-    	}
+    		for (unsigned int j=0; j<chords_vec[i].size(); ++j) {
+        		cout << chords_vec[i][j] << " ";
+    		}
     	cout << "\n";
 	}
 }

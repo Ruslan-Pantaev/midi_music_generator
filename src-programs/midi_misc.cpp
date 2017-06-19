@@ -26,15 +26,14 @@ int random_int(int min, int max) {
 	return uni(rng);
 }
 
-/* Another way to implement random function
-void MIDI_Scale::seed_gen() {
-	gen.seed(static_cast<unsigned int>(std::time(0)));
-}
+/* Another way to implement random function */
+// void MIDI_Scale::seed_gen() {
+// 	gen.seed(static_cast<unsigned int>(std::time(0)));
+// }
 
-int MIDI_Scale::gen_rand_num() {
-	// seed_gen(); // put in main.cpp
-	boost::uniform_int<> dist(1, 2);
-    	boost::variate_generator<boost::mt19937&, boost::uniform_int<> > num(gen, dist);
-    	return num();
-}
-*/
+// int MIDI_Scale::gen_rand_num() {
+// 	// seed_gen(); // put in main.cpp
+// 	boost::uniform_int<> dist(1, 2);
+//     	boost::variate_generator<boost::mt19937&, boost::uniform_int<> > num(gen, dist);
+//     	return num();
+// }
