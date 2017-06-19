@@ -9,6 +9,8 @@
  
 The C++ MIDI music generator creates midi files from scratch. It can accept user defined note sequences & chords, random chords, or pseuodo-random chords within a specified key or mode. I will continue to update chords & scales and allow for custom tone-rows. Special thanks to Joel Yliluoma <bisqwit> for the midi handling classes (see midi_gen_bisqwit.h, ported from <http://bisqwit.iki.fi/jutut/kuvat/programming_examples/midimake.cc>).
 
+Feel free to download an example .mid file and upload here: <https://onlinesequencer.net/import> You can play around with changing the tempo, key and instrument types.
+
 
 ### Todos
 
