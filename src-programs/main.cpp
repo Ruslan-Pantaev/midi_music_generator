@@ -183,7 +183,7 @@ int main() {
 	for (unsigned loops=0; loops<4; ++loops) {				// SET num REPEATS here
 		for (unsigned row=0; row<128; ++row) {				// SET length of each measure
 			for(unsigned c=0; c<16; ++c) {				// 16 for patches, c stands for CHANNEL
-				int note 	= x;				// Arbitrary value to specify "no note" --> 128 for note-off
+				int note 	= x;					// Arbitrary value to specify "no note" --> 128 for note-off
 				int add 	= 0;
 				int vol 	= 127;
 
@@ -235,6 +235,7 @@ int main() {
 		if (loops == 0) {
 			file.AddLoopEnd();
 		}
+		/* TODO add delay at EOF or add fade_out() function */
 	}
 
 	file.Finish();
