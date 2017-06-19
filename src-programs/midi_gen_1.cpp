@@ -20,11 +20,14 @@ using namespace std;
 
 
 int main() {
+	/* -------------------------------------------------------------------------------------------------
+	 * start-Implementation example of MIDI_Chord class
+ 	 * -------------------------------------------------------------------------------------------------
+	 */
+
 	MIDI_Chord ch;
 
-	// cout << "random int: " << random_int(25, 100) << "\n";
-
-	/* Manually populate vector of chords to be used */
+	/* Example of how to explicitly populate vector of chords to be used */
 	// ch.add_chord(note::E, "maj7");
 	// ch.add_chord(note::Gb, "min7");
 	// ch.add_chord(note::Db, "min9");
@@ -35,29 +38,38 @@ int main() {
 	// ch.add_chord(note::E+note::oct_up, "maj11");
 
 	/* Or random chords with user-specified Key */
-	/* add_rand_chord()aaaaaaaaaaaa is also overloaded without any key parameter */
+	/* add_rand_chord(int key) is also overloaded without any key parameter */
 	for (int i=0; i<8; ++i) {
 		ch.add_rand_chord(key::C);
 	}
 
+	/* Print chords to terminal */
 	ch.print_chords();
 
-	// ch.inversion(0, 1);
-	// ch.inversion(1, 2);
-	// ch.inversion(2, 2);
-	// ch.inversion(3, 1);
-	// ch.inversion(4, 1);
-	// ch.inversion(5, 1);
-	// ch.inversion(6, 1);
-	// ch.inversion(7, 2);
+	ch.inversion(0, 1);
+	ch.inversion(1, 2);
+	ch.inversion(2, 2);
+	ch.inversion(3, 1);
+	ch.inversion(4, 1);
+	ch.inversion(5, 1);
+	ch.inversion(6, 1);
+	ch.inversion(7, 2);
 
 	for (int i=0; i<8; ++i) {
 		ch.oct_up(i);
 	}
 
-	const char x = 128;			// Arbitrary value to specify "no note" --> 128 for note-off (make enum?)
+	/* -------------------------------------------------------------------------------------------------
+	 * end-Implementation example of MIDI_Chord class
+ 	 * -------------------------------------------------------------------------------------------------
+	 */
 
-	MIDI_Scale scl_obj;
+	/* -------------------------------------------------------------------------------------------------
+	 * start-Implementation example of MIDI_Scale class
+ 	 * -------------------------------------------------------------------------------------------------
+	 */
+
+	// MIDI_Scale scl_obj;
 
 	// char chordline[64] = {
 	//     0,x,1,2,x,3,x, 4,x,5,x,6,8,x,8,x,  8,x,6,8,x,10,x, 10,x,11,x,6,3,x,5,x,
@@ -81,18 +93,30 @@ int main() {
 	//     cout << chordline[i] << endl;
 	// }
 
+	/* -------------------------------------------------------------------------------------------------
+	 * end-Implementation example of MIDI_Scale class
+ 	 * -------------------------------------------------------------------------------------------------
+	 */
+
+ 	/* -------------------------------------------------------------------------------------------------
+	 * start-Define instrument rhythyms
+ 	 * -------------------------------------------------------------------------------------------------
+	 */
+
+	/* TODO should these be const static?
+	 * Maybe it'll be better to be be able to wipe these
+	 * Assign chordlines and melodies using set_scale(key, vector<char> scale_type)
+	 * edit arpiseaQ_6/5/2017_13:21
+	 * edit arpiseaQ_6/19/2017_09:25 (Italy timezone)
+	 */
+
+	const char x = 128;		// Value to specify "no note" --> 128 for note-off (preprocessor definition emitted err)
+
 	static const char chordline[64] =
 	{
 		0,1,2,3,4,5,6,7, 1,x,x,x,x,x,x,x,  2,x,x,x,x,x,x,x, 3,x,x,x,x,x,x,x,
 		4,x,x,x,x,x,x,x, 5,x,x,x,4,5,x,x,  6,x,x,x,1,x,2,x, 7,x,x,x,x,3,7,3,
 	};
-
-	/* TODO should these be const static?
-	* Maybe it'll be better to be be able to wipe these
-	* Assign chordlines and melodies using set_scale(key, vector<char> scale_type)
-	* edit arpiseaQ_6/5/2017_13:21
-	* edit arpiseaQ_6/19/2017_09:25 (Italy timezone)
-	*/
 
 	static const char bassline[64] =
 	{
@@ -118,8 +142,27 @@ int main() {
 		note::C,note::D,note::F,note::A,note::G,note::B,note::A,note::C+note::oct_up
 	};
 
+	/* -------------------------------------------------------------------------------------------------
+	 * end-Define instrument rhythyms
+ 	 * -------------------------------------------------------------------------------------------------
+	 */
+
+	/* -------------------------------------------------------------------------------------------------
+	 * start-Generate .mid file
+	 * -------------------------------------------------------------------------------------------------
+	 *
+	 * TODO put below into functions, with following user defined parameters:
+	 * 	patches (make commented list of corresponding instruments for ease of use)
+	 *	tempo
+	 * 	num repeats / loops
+	 *	length of each measure (how will I handle odd time; how should I represent time signatures?)
+	 * 	chordline rhythmic patterns to be used (vector<int> or vector<char> ?)
+	 *		% (mod) value based on chordline.size()
+	 *	create randomize velocities function? (within specified range)
+	 */
+
 	MIDIfile file;
-	file.set_tempo(1200000);
+	file.set_tempo(1200000);						// TODO convert to readable BPM format
 	file.AddLoopStart();
 
 	/* Choose instruments ("patches") for each channel: */
@@ -177,18 +220,34 @@ int main() {
 					add=12*5;
 					vol=0x6F;
 				}
-				if (note == x && (c<15 || row%31)) { continue; }
+				if (note == x && (c<15 || row%31)) {
+					continue;
+				}
 				file[0].KeyOff(c, keys_on[c], 0x20);
 				keys_on[c] = -1;
-				if (note == x) { continue; }
+				if (note == x) {
+					continue;
+				}
 				file[0].KeyOn(c, keys_on[c] = note+add, vol);	// channel, note number, pressure
 			}
 			file[0].AddDelay(500);					// val 500 fixes tempo to be playable/locked in at 120bpm
 		}
-		if(loops == 0) { file.AddLoopEnd(); }
+		if (loops == 0) {
+			file.AddLoopEnd();
+		}
 	}
 
 	file.Finish();
+
+	/* -------------------------------------------------------------------------------------------------
+	 * end-Generate .mid file
+	 * -------------------------------------------------------------------------------------------------
+	 */
+
+	/* -------------------------------------------------------------------------------------------------
+	 * start-Create / check Dir & output .mid file
+ 	 * -------------------------------------------------------------------------------------------------
+	 */
 
 	if (!boost::filesystem::exists("../midi_files")) {
 		boost::filesystem::create_directories("../midi_files");
@@ -205,5 +264,11 @@ int main() {
 	fclose(outfile); 
 
 	cout << "untitled.mid file created successfully \n";
+
+	/* -------------------------------------------------------------------------------------------------
+	 * end-Create / check Dir & output .mid file
+ 	 * -------------------------------------------------------------------------------------------------
+	 */
+
 	return 0;
 }
