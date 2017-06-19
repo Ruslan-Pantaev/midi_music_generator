@@ -14,13 +14,14 @@ The C++ MIDI music generator creates midi files from scratch. It can accept user
 
  - Write install instructions and dependencies
  - Fix makefile (currently a custom sublime-text Build System w/ arbitrary file path to src-programs)
- - Work out midi_scale_types to generate melodies & define chord-scales within a specified key
- - Change scale_types to vector<char> to handle octatonic, pentatonic, custom tone-rows & traditional modes (using char so user can indicate 'x' to indicate note-offs with the added benefit of taking up 1 byte vs 4 bytes of an int)
+ - Work out midi_scale_types to generate melodies and define chord-scales within a specified key
+ - Change scale_types to vector<char> to handle octatonic, pentatonic, custom tone-rows and traditional modes (using char so user can indicate 'x' to indicate note-offs with the added benefit of taking up 1 byte vs 4 bytes of an int)
  - Create main.cpp template for ease of use
- - Clean up & simplify classes
+ - Clean up and simplify classes
  - Respect the canonical form... add copy consr and assign op
  - Put dir and file check / creation into midi_misc.h?
  - Add command-line args for key, tempo & no. repeats?
+ - Parse and remix .mid files?
  - Incorporate libsndfile wav / aiff handling
  - Incorporate timidity++ or some other lib to convert .mid to audio file? (experienced bugs in osx 10.11.6)
  - Port over backend to server and create web-app frontend for ease of use?
